@@ -29,13 +29,13 @@ import com.satya.restful.messenger.service.MessageService;
  * Root resource (exposed at "messages" path)
  */
 @Path("/messages")
+@Consumes(value={MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces(value={MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class MessageResource {
 	
 	MessageService svc = new MessageService();
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    
+  @GET    
 	public List<Message> getMessages(@BeanParam MessageFilterBean messageFilterBean) throws Exception {
     	
     	if (messageFilterBean.getYear() > 0){
@@ -51,7 +51,6 @@ public class MessageResource {
     
     
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{messageId}")
     public Message getMessage(@PathParam(value = "messageId") long messageId, @Context UriInfo uriInfo){
     	Message message = svc.getMessage(messageId);
@@ -74,8 +73,6 @@ public class MessageResource {
 		
     
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response addMessage(Message message, @Context UriInfo uriInfo) throws URISyntaxException{
     	Message newMessage = svc.addMessage(message);
     	/*return Response.status(Status.CREATED)
@@ -99,8 +96,6 @@ public class MessageResource {
     }
     
     @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("{messageId}")
     public Response updateMessage(@PathParam(value="messageId") long id, Message message){
     	message.setId(id);
@@ -109,7 +104,6 @@ public class MessageResource {
     }
     
     @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("{messageId}")
     public Message deleteMessage(@PathParam(value="messageId") long id){
     	return svc.removeMessage(id);

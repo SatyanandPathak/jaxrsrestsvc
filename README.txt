@@ -43,3 +43,6 @@ git push -u origin master
 
 git@github.com:SatyanandPathak/Angular4.git
 
+#####################################################
+
+URL: http://localhost:8080/restmessengersvc/webapi/messages/
