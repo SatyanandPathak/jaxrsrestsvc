@@ -11,12 +11,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name="message")
-public class Message implements Serializable{
+public class Message {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private long id;
 	private String message;
 	private Date created;
@@ -90,12 +90,12 @@ public class Message implements Serializable{
 		links.add(infoLink);
 	}
 
-	public String toString(){
-		return new StringBuilder().append("Message:")
-				.append("message:").append(message).append(",")
-				.append("Created Date:").append(created).append(",")
-				.append("Author:").append(author).append("")
-				.toString();
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", message=" + message + ", created=" + created + ", author=" + author + ", comments="
+		    + comments + ", links=" + links + "]";
 	}
+
+	
 
 }
